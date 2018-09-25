@@ -7,9 +7,9 @@ module Bitgo
 
       attr_accessor :session_token
 
-      TEST = 'https://test.bitgo.com/api/v1'
-      LIVE = 'https://bitgo.com/api/v1'
-      EXPRESS = 'http://127.0.0.1:3080/api/v1'
+      TEST = 'https://test.bitgo.com/api/v2'
+      LIVE = 'https://bitgo.com/api/v2'
+      EXPRESS = 'http://127.0.0.1:3080/api/v2'
 
       def initialize(end_point)
         @end_point = end_point
