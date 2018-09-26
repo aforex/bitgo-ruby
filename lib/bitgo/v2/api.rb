@@ -235,19 +235,19 @@ module Bitgo
       # confirmedBalance	the confirmed balance
       # balance	the balance, including transactions with 0 confirmations
       def get_wallet(wallet_id:)
-        call :get, "#{@currency}/wallet/#{wallet_id}"
+        call :get, "/#{@currency}/wallet/#{wallet_id}"
       end
 
       # Gets a list of addresses which have been instantiated for a wallet using the New Address API.
       def list_wallet_addresses(wallet_id:)
-        call :get, "#{@currency}/wallet/#{wallet_id}/addresses"
+        call :get, "/#{@currency}/wallet/#{wallet_id}/addresses"
       end
 
       # Creates a new address for an existing wallet. BitGo wallets consist of two independent chains of addresses, designated 0 and 1.
       # The 0-chain is typically used for receiving funds, while the 1-chain is used internally for creating change when spending from a wallet.
       # It is considered best practice to generate a new receiving address for each new incoming transaction, in order to help maximize privacy.
       def create_address(wallet_id:)
-        call :post, "#{@currency}/wallet/#{wallet_id}/address"
+        call :post, "/#{@currency}/wallet/#{wallet_id}/address"
       end
 
       def send_coins_to_address(wallet_id:, address:, amount:,walletPassphrase:, minConfirms: nil, fee: nil)
@@ -260,7 +260,7 @@ module Bitgo
             fee: fee
         }.delete_if { |_, v| v.nil? }
 
-        call :post, "#{@currency}/wallet/#{wallet_id}/sendcoins", params
+        call :post, "/#{@currency}/wallet/#{wallet_id}/sendcoins", params
       end
 
       # TODO: update to api v2
@@ -282,7 +282,7 @@ module Bitgo
             url: url,
             numConfirmations: confirmations
         }
-        call :post, "#{@currency}/wallet/#{wallet_id}/webhooks", add_webhook_params
+        call :post, "/#{@currency}/wallet/#{wallet_id}/webhooks", add_webhook_params
       end
 
 
@@ -291,11 +291,11 @@ module Bitgo
             type: type,
             url: url
         }
-        call :delete, "#{@currency}/wallet/#{wallet_id}/webhooks", remove_webhook_params
+        call :delete, "/#{@currency}/wallet/#{wallet_id}/webhooks", remove_webhook_params
       end
 
       def list_webhooks(wallet_id:)
-        call :get, "#{@currency}/wallet/#{wallet_id}/webhooks"
+        call :get, "/#{@currency}/wallet/#{wallet_id}/webhooks"
       end
 
       ###############
